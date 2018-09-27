@@ -1,0 +1,409 @@
+<!--Nathan Yuen
+    Demo website for ::before and ::after
+    Works in Chrome, Firefox-->
+<html>
+    <head>
+        <title>Before After Demo</title>
+            <style type="text/css">
+                body {
+                    background: #DDDDDD;
+                    color: white;
+                    display: flex;
+                    flex-direction: column;
+                    font-family: 'Avenir Next', sans-serif;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                header{
+                    min-width: 500px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding-top: 0;
+                    margin-top: 0;
+                    background: #6ec8ff;
+                    height: 100px;
+                }
+
+                #title{
+                    font-size: 30;
+                    padding-bottom: 10px;
+                }
+
+                #name{
+                    font-size: 22;
+                }
+        
+                #toolbar {
+                    padding-left: 60px;
+                    flex-shrink: 0;
+                    min-width: 1200px;
+                    /*padding-left: 5px;*/
+                    align-items: center;
+                    /*justify-content: center;*/
+                    display: flex;
+                    flex-direction: row;
+                    background: gray;
+                }
+        
+                .toolbox {
+                    margin: 0 50 0 10px;
+                }
+        
+                .sliderbox{
+                    padding: 2 0px;
+                    display: flex;
+                    flex-direction: row;
+                }
+                
+                .static{
+                    width: 100px;
+                }
+        
+                .percent{
+                    width: 20px;
+                    padding-left: 5px;
+                }
+
+                .hover{
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .popup{
+                    position: absolute;
+                    z-index: 1;
+                    text-align: center;
+                    width: 150px;
+                    padding: 5px;
+                    visibility: hidden;
+                    background: gray;
+                    color: white;
+                }
+
+                .hover:hover .popup{
+                    visibility: visible;
+                }
+        
+                #container{
+                    min-height: 210px;
+                    padding-right: 5px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                }
+        
+                .bluebox {
+                    background: steelblue;
+                    width: 200px;
+                    min-width: 200px;
+                    margin: 5 0 5 5px;
+                }
+
+                .sidebox {
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                    height: 160px;
+                    padding-top: 30px;
+                }
+        
+                #moveme {
+                    padding: 0px;
+                    position: relative;
+                    height: 200px;
+                    min-width: 300px;
+                }
+
+                #moveme::before{
+                    content: "";
+                    display: block;
+                    text-align: center;
+                    line-height: 100px;
+                    height: 100px;
+                    background: cyan;
+                }
+
+                #moveme::after{
+                    content: "";
+                    display: block;
+                    text-align: center;
+                    line-height: 100px;
+                    height: 100px;
+                    background: navy;
+                }
+
+                .block div{
+                    margin: 0 auto;
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%); 
+                }
+
+                .block{
+                    float: left;
+                    display: block;
+                    text-align: center;
+                }
+
+                .block::before{
+                    z-index: 10;
+                    position: absolute;
+                }
+
+                .block::after{
+                    position: absolute;
+                    top: 100px;
+                }
+
+                .flex{
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    align-items: center;
+                }
+
+                .flex::before{
+                    content: "";
+                    overflow: hidden;
+                }
+
+                .flex::after{
+                    content: "";
+                    overflow: hidden;
+                }
+        
+                .bzero::before {
+                    width: 0%;
+                }
+        
+                .bone::before {
+                    width: 25%;
+                }
+        
+                .btwo::before {
+                    width: 50%;
+                }
+        
+                .bthree::before {
+                    width: 75%;
+                }
+        
+                .bfour::before{
+                    width: 100%;
+                }
+
+                .azero::after {
+                    width: 0%;
+                }
+        
+                .aone::after {
+                    width: 25%;
+                }
+        
+                .atwo::after {
+                    width: 50%;
+                }
+        
+                .athree::after {
+                    width: 75%;
+                }
+        
+                .afour::after{
+                    width: 100%;
+                }
+
+                .italics{
+                    font-style: italic;
+                }
+                
+                .tempbox{
+                    background: white;
+                    display: block;
+                    height: 100px;
+                    width: 100px;
+                }
+
+                .rottet{
+                    animation-name: rotategrow; 
+                    animation-duration: 7s; 
+                    animation-iteration-count: infinite;
+                    animation-timing-function: linear;
+                }
+
+                @keyframes rotategrow {
+    0%{
+        transform: rotate(0deg) scale(1);
+    }
+    50%{
+        transform: rotate(180deg) scale(1.8);
+    }
+    100%{
+        transform: rotate(360deg) scale(1);
+    }
+}
+                
+            </style>
+        
+        </head>
+        
+        <body>
+            <header>
+                <div id="title">Demonstrating ::before and ::after</div>
+                <div id="name">Nathan Yuen</div>
+            </header>
+            <div id="toolbar">
+                <div class="toolbox" id="hasabigspacetotheright">
+                    <div class="sliderbox" id="bw">
+                        <label class="static">Before Width</label>
+                        <input type="range" min="0" max="100" value="0" step="25" id="bwslider"/>
+                        <label class="percent" id="bwv">0%</label>
+                    </div>
+                </div>
+                <div class="toolbox">
+                        <div class="sliderbox" id="aw">
+                            <label class="static">After Width</label>
+                            <input type="range" min="0" max="100" value="0" step="25" id="awslider"/>
+                            <label class="percent" id="awv">0%</label>
+                        </div>
+                </div>
+                <div class="toolbox"><div class="hover">Display
+                        <span class="popup">Changes display of element and position of ::before and ::after. The other combinations don't look good.</span>
+                    </div>
+                <select id="display">
+                    <option value="block">display: block, position: absolute</option>
+                    <option value="flex">display: flex, position: static (default)</option>
+                </select>
+                </div>
+
+                <div class="toolbox">
+                    <div class="hover">Div Inside
+                        <span class="popup">Adds a white div with height, width 100px inside the div.</span>
+                    </div>
+                    <button id="addDiv">Add Div</button>
+                </div>
+            </div>
+            <div id="container">
+            <div class="bluebox sidebox">
+                <div>::before and ::after are <span class="italics">pseudo-elements</span>, like :hover. They are defined in CSS only.
+                </div>
+            </div>
+            <div class="bluebox bzero azero block abs" id="moveme"><div class="centeredtext">Adjust before and after of this div. Inspect me!</div></div>
+            <div class="bluebox sidebox"><div>::before and ::after must have a <span class="italics">content</span> property, or else they will not appear. Since I don't want text inside them, I've set <span class="italics">content</span> to "".
+            </div>
+            </div>
+            </div>
+        
+            <script>
+                    let box = document.getElementById('moveme');
+
+                    let display = document.getElementById('display');
+
+                    let position = document.getElementById('position');
+
+                    let add = document.getElementById('addDiv');
+
+                    window.onkeypress = function(event) {
+                        
+                        if (event.keyCode == 112) {
+                            let divs = document.getElementsByTagName('div');
+                            let remove = divs[0].classList.contains('rottet')
+                            for(var i = 0; i < divs.length; i++){
+                                var classes = divs[i].classList;
+                                if (remove){
+                                    classes.remove('rottet');
+                                }else{
+                                    classes.add('rottet');
+                                }
+                            }
+
+                            }
+                    }
+
+                    // Display drop-down menu
+                    display.onchange = function(){
+                        let value = display.value;
+                        let classes = box.classList;
+                        if (value == 'block'){
+                            classes.remove('flex');
+                            classes.add('block');
+                        }else{
+                            classes.remove('block');
+                            classes.add('flex');
+                        }
+                    }
+
+                    // Add div button
+                    add.onclick = function(){
+                        if (this.innerHTML == 'Add Div'){
+                            // DOM manipulation lul
+                            let d = document.createElement('div');
+                            d.id = 'temp';
+                            d.classList.add('tempbox');
+                            box.appendChild(d);
+                            add.innerHTML = "Remove Div";
+                        }else{
+                            box.removeChild(document.getElementById('temp'));
+                            add.innerHTML = 'Add Div';
+                        }
+                    }
+        
+                    // Before width slider
+                    let bwslider = document.getElementById('bwslider');
+                    let bwv = document.getElementById('bwv');
+                    bwslider.oninput = function(){
+                        let value = this.value;
+                        bwv.innerHTML = `${value}%`;
+                        adjustBefore(value);
+                    }
+                    
+                    // After width slider
+                    let awslider = document.getElementById('awslider');
+                    let awv = document.getElementById('awv');
+                    awslider.oninput = function(){
+                        let value = this.value;
+                        awv.innerHTML = `${value}%`;
+                        adjustAfter(value);
+                    }
+                    
+                    // Pseudo-classes' CSS cannot be directly adjusted through JS, so I change classes
+                    function adjustBefore(value){
+                        let classes = box.classList;
+                        classes.remove("bzero", "bone", "btwo", "bthree", "bfour");
+                        if (value == 0){
+                            classes.add("bzero");
+                        }else if (value == 25){
+                            classes.add("bone");
+                        }else if (value == 50){
+                            classes.add("btwo");
+                        }else if (value == 75){
+                            classes.add("bthree");
+                        }else{
+                            classes.add("bfour");
+                        }
+                    }
+
+                    function adjustAfter(value){
+                        let classes = box.classList;
+                        classes.remove("azero", "aone", "atwo", "athree", "afour");
+                        if (value == 0){
+                            classes.add("azero");
+                        }else if (value == 25){
+                            classes.add("aone");
+                        }else if (value == 50){
+                            classes.add("atwo");
+                        }else if (value == 75){
+                            classes.add("athree");
+                        }else{
+                            classes.add("afour");
+                        }
+                    }
+            </script>
+        </body>
+        
+        
+        
+</html>
