@@ -12,6 +12,10 @@ Adjustable ::before and ::after with sliders, short description of how the comma
 
 Teacher: Brian Sea from the Head-Royce School
 
+# Author
+
+Nathan Yuen
+
 # License
 
 GPL 3.0 2018
